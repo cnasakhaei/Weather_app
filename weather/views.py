@@ -43,7 +43,9 @@ def get_weather_info(city_name):
 
             sunrise_time = time_format_for_location(sunrise + timezone)
             sunset_time = time_format_for_location(sunset + timezone)
+
             return {
+                "status" : True,
                 "temp" : temp,
                 "feels" : feels_like_temp,
                 "pressure" : pressure,
@@ -58,18 +60,18 @@ def get_weather_info(city_name):
                 "sunset_time" : sunset_time,
 
             }
-            return f"Weather of: {city_name}\nTemperature (Celsius): {temp}°\nFeels like in (Celsius): {feels_like_temp}°\nPressure: {pressure} hPa\nHumidity: {humidity}%\nSunrise at {sunrise_time} and Sunset at {sunset_time}\nCloud: {cloudy}%\nInfo: {description}"
+        
         else:
-            return f"Weather for '{city_name}' not found! Kindly enter a valid City Name!"
+            return {"status" : False, "message" : f"Weather for '{city_name}' not found! Kindly enter a valid City Name!"}
     else:
-        return f"City '{city_name}' not found! Kindly enter a valid City Name!"
+        return{"status" : False, "message" : f"City '{city_name}' not found! Kindly enter a valid City Name!"}
 
 def time_format_for_location(utc_with_tz):
     local_time = datetime.utcfromtimestamp(utc_with_tz)
     return local_time.time()
 
 def show_weather(request):
-    city_name = request.GET.get('city_name', False).capitalize()
+    city_name = request.GET.get('city_name', False)
     if city_name == False:
         return render(request, 'weather/weather.html')
     weather_info = get_weather_info(city_name)

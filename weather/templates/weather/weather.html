@@ -19,7 +19,8 @@
         </form>
     </div>
 
-    {% if weather_info %}
+
+    {% if weather_info.status %}
     <div class="flex flex-col justify-center items-center bg-sky-800 w-2/4 mx-auto mt-32 rounded-2xl pb-7">
 
         <h2 class="text-2xl font-bold mt-4 text-gray-50">Weather Information:</h2>
@@ -28,12 +29,19 @@
         <p class="text-white font-semibold pt-2">Feels like in (Celsius): {{ weather_info.feels }}°</p>
         <p class="text-white font-semibold pt-2">Pressure: {{ weather_info.pressure }} hPa</p>
         <p class="text-white font-semibold pt-2">Humidity: {{ weather_info.humidity }} %</p>
-        <p class="text-white font-semibold pt-2">Sunrise at {{weather_info.sunrise_time}} and Sunset at {{weather_info.sunset_time}}</p>
-        <p class="text-white font-semibold pt-2">Colud : {{weather_info.cloudy}} %</p>
         <p class="text-white font-semibold pt-2">Info : {{weather_info.description}}</p>
-        
+        <p class="text-white font-semibold pt-2">Colud : {{weather_info.cloudy}} %</p>
+           <p class="text-white font-semibold pt-2">Sunrise at {{weather_info.sunrise_time}} and Sunset at
+               {{weather_info.sunset_time}}</p>
+
     </div>
+    {% else %}
+            <div class="flex items-center justify-center">
+                <div class="font-bold text-purple-600 mt-10 bg-slate-300 p-10 rounded-xl">{{weather_info.message}}</div>
+            </div>
     {% endif %}
+
+
 
 </body>
 
