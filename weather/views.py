@@ -40,10 +40,10 @@ def get_weather_info(city_name):
             timezone = weather_info['timezone']
             cloudy = weather_info['clouds']['all']
             description = weather_info['weather'][0]['description']
-
+            icon_num = weather_info["weather"][0]["icon"]
+            icon = "https://openweathermap.org/img/wn/" + icon_num +"@2x.png"
             sunrise_time = time_format_for_location(sunrise + timezone)
             sunset_time = time_format_for_location(sunset + timezone)
-
             return {
                 "status" : True,
                 "temp" : temp,
@@ -58,7 +58,7 @@ def get_weather_info(city_name):
                 "description" : description,
                 "sunrise_time" : sunrise_time,
                 "sunset_time" : sunset_time,
-
+                "icon" : icon
             }
         
         else:

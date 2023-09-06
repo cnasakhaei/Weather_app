@@ -25,10 +25,15 @@
 
     {% if weather_info.status %}
     <div class="flex flex-col justify-center items-center bg-sky-800 w-2/4 mx-auto mt-32 rounded-2xl pb-7">
-
+        
+        
         <h2 class="text-2xl font-bold mt-4 text-gray-50">Weather Information:</h2>
         <h3 class="text-xl font-bold text-orange-300 ">Weather of : {{city_name}}</h3><br>
-        <p class="text-white font-semibold">Temperature (Celsius): {{ weather_info.temp }}°</p>
+        <div class="flex items-center">
+              <img src="{{weather_info.icon}}" alt="">
+              <p class="text-white font-bold text-5xl">{{ weather_info.temp }}°</p>
+        </div>
+      
         <p class="text-white font-semibold pt-2">Feels like in (Celsius): {{ weather_info.feels }}°</p>
         <p class="text-white font-semibold pt-2">Pressure: {{ weather_info.pressure }} hPa</p>
         <p class="text-white font-semibold pt-2">Humidity: {{ weather_info.humidity }} %</p>
