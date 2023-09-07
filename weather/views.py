@@ -12,6 +12,8 @@ def get_weather_info(city_name):
         "appid": api_key
     }
 
+    
+
     response = requests.get(url=get_geo_url, params=params)
     response_json = response.json()
     
@@ -19,12 +21,16 @@ def get_weather_info(city_name):
         lat = response_json[0]["lat"]
         lon = response_json[0]["lon"]
         
+        air_pollution_url = "http://api.openweathermap.org/data/2.5/air_pollution"
         weather_url = "http://api.openweathermap.org/data/2.5/weather"
         params = {
             "lat": lat,
             "lon": lon,
             "appid": api_key
         }
+        
+        air_pollution_response = requests.get(air_pollution_url, params=params)
+        air_pollution = air_pollution_response.json()
 
         response = requests.get(weather_url, params=params)
         weather_info = response.json()
@@ -44,6 +50,20 @@ def get_weather_info(city_name):
             icon = "https://openweathermap.org/img/wn/" + icon_num +"@2x.png"
             sunrise_time = time_format_for_location(sunrise + timezone)
             sunset_time = time_format_for_location(sunset + timezone)
+            quality = air_pollution["list"][0]["main"]["aqi"]
+            def switch_case(quality):
+                if quality == 1:
+                    return("Good")
+                elif quality == 2:
+                    return("Fair")
+                elif quality == 3:
+                    return("Moderate")
+                elif quality == 4:
+                    return("Poor")
+                elif quality == 5:
+                    return("Very Poor")
+                else:
+                    return("Air pollution not found!")
             return {
                 "status" : True,
                 "temp" : temp,
@@ -58,7 +78,8 @@ def get_weather_info(city_name):
                 "description" : description,
                 "sunrise_time" : sunrise_time,
                 "sunset_time" : sunset_time,
-                "icon" : icon
+                "icon" : icon,
+                "air" : switch_case(quality)
             }
         
         else:
