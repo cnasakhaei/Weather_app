@@ -38,14 +38,14 @@
         <p class="text-white font-semibold pt-4 text-2xl">Pressure: {{ weather_info.pressure }} hPa</p>
         <p class="text-white font-semibold pt-4 text-2xl">Humidity: {{ weather_info.humidity }} %</p>
         <p class="text-white font-semibold pt-4 text-2xl">Info : {{weather_info.description}}</p>
-        <p class="text-white font-semibold pt-4 text-2xl">Colud : {{weather_info.cloudy}} %</p>
+        <p class="text-white font-semibold pt-4 text-2xl">Cloud : {{weather_info.cloudy}} %</p>
         <p class="text-white font-semibold pt-4 text-2xl">Air Quality : {{weather_info.air}} </p>
-        <p class="text-white font-semibold pt-4 text-2xl">Sunrise at {{weather_info.sunrise_time}} and Sunset at{{weather_info.sunset_time}}</p>
+        <p class="text-white font-semibold pt-4 text-2xl">Sunrise at {{weather_info.sunrise_time}} and Sunset at {{weather_info.sunset_time}}</p>
 
     </div>
     {% else %}
             <div class="flex items-center justify-center">
-                <div class="font-bold text-purple-600 mt-10 p-10 rounded-xl">{{weather_info.message}}</div>
+                <div class="font-bold text-purple-600 mt-10 p-10 rounded-xl text-xl">{{weather_info.message}}</div>
             </div>
     {% endif %}
 
